@@ -31,14 +31,13 @@ function getAllVersionsLinks(){
 rawVersionLinks=`curl -sf "$version" | tr '"' '\n' | grep 'cdn.down' | sort -u | sed 's/&amp;/\&/g'`
 echo $rawVersionLinks | while read rawLink;do 
 echo "$CYAN[__RAW__]$NON $rawLink"
-prepareDownload "$rawLink"
-;done
+prepareDownload "$rawLink";done
 }
 
 function prepareDownload(){
 echo "$RED[GETTING]$NON $rawLink $GREEN[$apkComponentName/$versionName.apk]$NON"
-mkdir "$apkComponentName" &&
-wget -O $apkComponentName/$versionName.apk $rawLink
+mkdir -p "$apkComponentName" &&
+wget -O "$apkComponentName/$versionName.apk" "$rawLink"
 }
 
 main(){
