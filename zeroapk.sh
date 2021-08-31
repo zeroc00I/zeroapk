@@ -2,6 +2,7 @@
 CYAN=`tput setaf 8`
 GREEN=`tput setaf 10`
 NON=`tput sgr0`
+RED=`tput setaf 1`
 apkurl="https://apkcombo.com"
 
 search="$1"
@@ -21,19 +22,23 @@ function getDownloadLinksRelated(){
 echo "$GREEN[__MAIN__]$NON $link $GREEN [$apkComponentName]$NON"
 allLinkVersions=`curl -sf "$link"| tr '"' '\n' |grep "$apkComponentName/download" | sed "s#^#$apkurl#g" |sort -u`
 echo "$allLinkVersions" | while read version;do
+versionName=`echo $version | awk -F '/' '{print $NF}'`
 echo "$CYAN[VERSIONS]$NON $version"
 getAllVersionsLinks "$version";done
 }
 
 function getAllVersionsLinks(){
-rawVersionLink=`curl -sf "$version" | tr '"' '\n' | grep 'cdn.down' | sort -u`
-echo "$CYAN[__RAW__]$NON $rawVersionLink"
+rawVersionLinks=`curl -sf "$version" | tr '"' '\n' | grep 'cdn.down' | sort -u | sed 's/&amp;/\&/g'`
+echo $rawVersionLinks | while read rawLink;do 
+echo "$CYAN[__RAW__]$NON $rawLink"
+prepareDownload "$rawLink"
+;done
 }
 
 function prepareDownload(){
+echo "$RED[GETTING]$NON $rawLink $GREEN[$apkComponentName/$versionName.apk]$NON"
 mkdir "$apkComponentName" &&
-cd "$apkComponentName" &&
-wget -O 
+wget -O $apkComponentName/$versionName.apk $rawLink
 }
 
 main(){
