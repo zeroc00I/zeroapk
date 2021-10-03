@@ -1,6 +1,6 @@
 # Zeroapk
 ## Eazy Peasy way to download all apks from a company name
-### * Fetching also all release versions
+### * Fetching also all releases version
 #### Example behind downloading all apks from Zomato and also all versions published along the time
 ---
 ![Preview of executable command](https://github.com/zeroc00I/zeroapk/blob/main/zeroapk.png)
