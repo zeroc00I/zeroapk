@@ -16,7 +16,7 @@
 
 Example: https://apkcombo.com/pt/developer/Zomato/
 
-Check bellow the example abut finding a app by name and then getting company name
+Check bellow the example about finding a app by name and then getting company name
 
 ![Where can i find company name](https://github.com/zeroc00I/zeroapk/blob/main/devname.jpeg?raw=true)
 
