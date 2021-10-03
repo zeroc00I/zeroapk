@@ -30,7 +30,7 @@ function getDownloadLinksRelated() {
 }
 
 function getAllVersionsLinks() {
-    rawVersionLinks=$(curl -sf "$version" | tr '"' '\n' | grep 'cdn.down' | sort -u | sed 's/&amp;/\&/g')
+    rawVersionLinks=$(curl -sf "$version" | tr '"' '\n' | grep -E 'cdn.down|gcdn\.apkcombo' | sort -u | sed 's/&amp;/\&/g')
     echo "$rawVersionLinks" | while read rawLink; do
         [[ ! -z "$rawLink" ]] &&
         echo "$CYAN[__RAW__]$NON $rawLink" &&
