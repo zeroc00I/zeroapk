@@ -16,6 +16,10 @@
 
 Example: https://apkcombo.com/pt/developer/Zomato/
 
+Check bellow the example abut finding a app by name and then getting company name
+
+![Where can i find company name](https://github.com/zeroc00I/zeroapk/blob/main/devname.jpeg?raw=true)
+
 ## What can i do with these apks?
 - You can decompress them all with Apktool or even Jadx and then go by code review it.
 
