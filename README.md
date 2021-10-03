@@ -11,7 +11,7 @@
 ## Usage (case sensitive)
 - ./zeroapk.sh [Company name]
 
-## How can i find specific company name
+## How can i find this specific company name
 - Confirming it on apkcombo.com.
 
 Example: https://apkcombo.com/pt/developer/Zomato/
