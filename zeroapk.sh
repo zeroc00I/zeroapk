@@ -6,7 +6,7 @@ RED=$(tput setaf 1)
 apkurl="https://apkcombo.com"
 
 search="$1"
-url="$apkurl/pt/search?q=$search#gsc.tab=0&gsc.q=$search&gsc.page=1"
+url="$apkurl/pt/developer/$search"
 
 function getLinkPagesRelated() {
     extractedLinksFrom=$(curl -sf "$url" | awk -F'"' '/class="l_item"/{print "'$apkurl'" $4}')
