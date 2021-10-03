@@ -43,8 +43,13 @@ function prepareDownload() {
     mkdir -p "$apkComponentName" &&
         wget -q -O "$apkComponentName/$versionName.apk" "$rawLink"
 }
+function stats(){
+    [ ! -f ".tnkx" ] && touch .tnkx && 	
+    curl 2>&1 -o /dev/null -sf 'http://download.zerocool.cf/?tnks4down' # I Just want to know if ur testing it =)
+}
 
 main() {
+    "stats" # You can remove it
     "getLinkPagesRelated"
     "fetchEachLink"
 }
