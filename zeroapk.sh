@@ -17,13 +17,13 @@ function getLinkPagesRelated() {
 }
 
 function authorSuggestion(){
-    suggestions=$(curl -sf 'https://apkcombo.com/pt/search?q='$search'' | 
-    grep '"author"' | tr '<>·' '#' | sort -u | 
-    awk -F '#' '{print $3}' | sed -e 's/^ //g;s# $##g'
+    suggestions=$(curl -sf "https://apkcombo.com/pt/search?q=$search" | 
+    grep '"author"' | tr '<>·' '#' | awk -F '#' '{print $3}' |
+    sed -e 's/^ //g;s# $##g;/^$/d' | sort -u
     )
     listSuggestions=$(echo "$suggestions"| awk '{print NR" "$0}')
 
-    echo -e "$GREEN[Did you mean]$NON Press the related number:\n$listSuggestions"
+    echo -e "$GREEN[Did you mean]$NON Press the related number:\n$listSuggestions\n\r$GREEN>$NON "
     read number
     pressedNumber=$(echo "$suggestions" | sed -n "$number,$number"p)
     echo "$GREEN[OK]$NON You've just entered $pressedNumber"
