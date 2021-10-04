@@ -12,7 +12,7 @@ url="$apkurl/pt/developer/$search"
 function getLinkPagesRelated() {
     extractedLinksFrom=$(curl -sf "$url" | awk -F'"' '/class="l_item"/{print "'$apkurl'" $4}')
     [[ -z "$extractedLinksFrom" ]] && 
-	    echo "$RED[Exiting]$NON Ops! Seems that you've entered a wrong author name (0 App Results Found)" &&
+	    echo "$RED[Exiting]$NON Ops! It seems that you've entered a wrong author name (0 App Results Found)" &&
         authorSuggestion
 }
 
