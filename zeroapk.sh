@@ -13,8 +13,24 @@ function getLinkPagesRelated() {
     extractedLinksFrom=$(curl -sf "$url" | awk -F'"' '/class="l_item"/{print "'$apkurl'" $4}')
     [[ -z "$extractedLinksFrom" ]] && 
 	    echo "$RED[Exiting]$NON Ops! Seems that you've entered a wrong author name (0 App Results Found)" &&
-    exit
+        authorSuggestion
 }
+
+function authorSuggestion(){
+    suggestions=$(curl -sf 'https://apkcombo.com/pt/search?q='$search'' | 
+    grep '"author"' | tr '<>·' '#' | sort -u | 
+    awk -F '#' '{print $3}' | sed -e 's/^ //g;s# $##g'
+    )
+    listSuggestions=$(echo "$suggestions"| awk '{print NR" "$0}')
+
+    echo -e "$GREEN[Did you mean]$NON Press the related number:\n$listSuggestions"
+    read number
+    pressedNumber=$(echo "$suggestions" | sed -n "$number,$number"p)
+    echo "$GREEN[OK]$NON You've just entered $pressedNumber"
+    url="$apkurl/pt/developer/$pressedNumber"
+    getLinkPagesRelated
+}
+
 
 function fetchEachLink() {
     echo "$extractedLinksFrom" | while read link; do
