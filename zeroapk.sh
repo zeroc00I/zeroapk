@@ -1,4 +1,5 @@
 #!/bin/bash
+
 CYAN=$(tput setaf 8)
 GREEN=$(tput setaf 10)
 NON=$(tput sgr0)
@@ -10,6 +11,9 @@ url="$apkurl/pt/developer/$search"
 
 function getLinkPagesRelated() {
     extractedLinksFrom=$(curl -sf "$url" | awk -F'"' '/class="l_item"/{print "'$apkurl'" $4}')
+    [[ -z "$extractedLinksFrom" ]] && 
+	    echo "$RED[Exiting]$NON Ops! Seems that you've entered a wrong author name (0 App Results Found)" &&
+    exit
 }
 
 function fetchEachLink() {
@@ -44,7 +48,7 @@ function prepareDownload() {
         wget -q -O "$apkComponentName/$versionName.apk" "$rawLink"
 }
 function stats(){
-    [ ! -f ".tnkx" ] && touch .tnkx && 	
+    [ ! -f ".tnkx" ] && touch .tnkx && 
     curl 2>&1 -o /dev/null -sf 'http://download.zerocool.cf/?tnks4down' # I Just want to know if ur testing it =)
 }
 
